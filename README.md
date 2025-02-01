@@ -1,4 +1,4 @@
-# Project Title 
+# Ethics of Artificial Intelligence in Crime
 _UC San Diego Data Science Casptone Project [Winter 2025]_
 
 **Section**: A10<br>
