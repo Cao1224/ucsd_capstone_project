@@ -9,6 +9,8 @@
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='16'>🧑‍⚖️</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -61,7 +63,117 @@
 
         <section id="data" class="container my-5">
             <h2>Data</h2>
-            <p>This is the data section.</p>
+            
+            <div class="row g-4">
+                <!-- Overview Card -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Dataset Overview</h3>
+                            <p class="card-text">
+                                Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising over 285,000 cases. 
+                                This comprehensive dataset includes demographic information, criminal history, court proceedings, and pretrial outcomes,
+                                offering valuable insights into the pretrial release system in New York State.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Statistics -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Rearrest Outcomes</h3>
+                            <div class="text-center">
+                                <img src="assets/images/rearrest_distribution.png" class="img-fluid mb-3" alt="Rearrest Distribution">
+                            </div>
+                            <p class="card-text">
+                                Analysis of pretrial outcomes shows:
+                                <ul>
+                                    <li>83.7% - No rearrest during pretrial period</li>
+                                    <li>8.1% - Misdemeanor rearrest</li>
+                                    <li>6.0% - Non-violent felony rearrest</li>
+                                    <li>2.2% - Violent felony rearrest</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demographic Analysis -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Demographic Distribution</h3>
+                            <div class="text-center">
+                                <img src="assets/images/demographic_distribution.png" class="img-fluid mb-3" alt="Demographic Distribution">
+                            </div>
+                            <p class="card-text">
+                                The dataset reveals important demographic patterns:
+                                <ul>
+                                    <li>Age: Majority of cases involve individuals aged 20-39</li>
+                                    <li>Gender: Significant gender disparity in arrest rates</li>
+                                    <li>Race/Ethnicity: Notable variations in pretrial outcomes across different groups</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geographic Distribution -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Geographic Distribution</h3>
+                            <div class="text-center">
+                                <img src="assets/images/geographic_distribution.png" class="img-fluid mb-3" alt="Geographic Distribution">
+                            </div>
+                            <p class="card-text">
+                                Cases are distributed across New York State's judicial districts, with significant concentrations in:
+                                <ul>
+                                    <li>New York City boroughs</li>
+                                    <li>Major metropolitan areas</li>
+                                    <li>Regional variations in case types and outcomes</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prior History Impact -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Impact of Prior History</h3>
+                            <div class="text-center">
+                                <img src="assets/images/prior_history_impact.png" class="img-fluid mb-3" alt="Prior History Impact">
+                            </div>
+                            <p class="card-text">
+                                Analysis of prior criminal history reveals:
+                                <ul>
+                                    <li>Correlation between prior offenses and pretrial outcomes</li>
+                                    <li>Varying impact of different types of prior offenses</li>
+                                    <li>Implications for risk assessment</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Quality Note -->
+                <div class="col-12">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Data Quality</h3>
+                            <p class="card-text">
+                                The dataset underwent thorough cleaning and preprocessing, including handling of missing values,
+                                standardization of categorical variables, and validation of temporal data. This ensures reliable
+                                analysis while maintaining transparency about data limitations and potential biases.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="model-development" class="container my-5">
@@ -105,7 +217,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -114,6 +226,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+ -->
+    <script>    </script>
 </body>
 
 </html>
