@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ethics of Artificial Intelligence in Crime</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='16'>🧑‍⚖️</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1">
+        <!-- Title -->
+        <div class="container text-center my-5">
+            <h1 class="fw-bolder">Ethics of Artificial Intelligence in Crime</h1>
+            <p class="text-muted">UC San Diego Data Science Capstone 2025</p>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="https://www.linkedin.com/in/cyc2025/" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-outline-primary m-2 px-3">Yuancheng (Kaleo) Cao</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/pukhrajfalak" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-outline-primary m-2 px-3">Aj Falak</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/kavya-sriram-1a440322b" target="_blank"
+                    class="text-decoration-none">
+                    <span class="btn btn-outline-primary m-2 px-3">Kavya Sriram</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/catherineback2" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-outline-primary m-2 px-3">Catherine Back</span>
+                </a>
+            </div>
+
+            <div class="d-flex justify-content-center flex-wrap mt-1">
+                <a href="https://www.linkedin.com/in/emily-ramond/" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-outline-secondary m-2 px-3">Emily Ramond<br><small><em>Mentor,
+                                Deloitte</em></small></span>
+                </a>
+                <a href="https://www.linkedin.com/in/gregorythein/" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-outline-secondary m-2 px-3">Greg Thein<br><small><em>Mentor,
+                                Deloitte</em></small></span>
+                </a>
+            </div>
+
+            <div class="d-flex justify-content-center flex-wrap mt-1">
+                <a href="https://github.com/cao1224/ucsd_capstone_project" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-dark m-2 px-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-github" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                        </svg>
+                        Code
+                    </span>
+                </a>
+
+                <a href="" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-dark m-2 px-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-file-earmark-pdf-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M5.523 12.424q.21-.124.459-.238a8 8 0 0 1-.45.606c-.28.337-.498.516-.635.572l-.035.012a.3.3 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548m2.455-1.647q-.178.037-.356.078a21 21 0 0 0 .5-1.05 12 12 0 0 0 .51.858q-.326.048-.654.114m2.525.939a4 4 0 0 1-.435-.41q.344.007.612.054c.317.057.466.147.518.209a.1.1 0 0 1 .026.064.44.44 0 0 1-.06.2.3.3 0 0 1-.094.124.1.1 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256M8.278 6.97c-.04.244-.108.524-.2.829a5 5 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.5.5 0 0 1 .145-.04c.013.03.028.092.032.198q.008.183-.038.465z" />
+                            <path fill-rule="evenodd"
+                                d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.7 11.7 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.86.86 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.84.84 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.8 5.8 0 0 0-1.335-.05 11 11 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.24 1.24 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a20 20 0 0 1-1.062 2.227 7.7 7.7 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103" />
+                        </svg>
+                        Paper (Coming Soon)
+                    </span>
+                </a>
+
+                <a href="" target="_blank" class="text-decoration-none">
+                    <span class="btn btn-dark m-2 px-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-image" viewBox="0 0 16 16">
+                            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                            <path
+                                d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+                        </svg>
+                        Poster (Coming Soon)
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <section id="introduction" class="container my-5">
+            <h2 class="">Introduction</h2>
+            <p>The use of artificial intelligence in criminal justice, particularly in pretrial risk assessment, has
+                raised concerns about bias. These algorithms predict the likelihood that a defendant will miss court or
+                reoffend, affecting decisions such as bail eligibility. While intended to reduce human bias, they often
+                reflect and amplify systemic inequalities in policing and arrest records. Ethical AI requires auditing
+                models for biased error rates and outcomes. Without proper oversight, these systems can worsen
+                inequalities instead of addressing them, ultimately eroding public trust in the legal system.
+                Responsible AI in pretrial decisions must ensure fairness and accountability.</p>
+
+
+            <h4>🚨 Three Main Risks of ML in Pretrial Risk Assessment</h4>
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg h-100">
+                        <div class="card-body text-center">
+                            <div class="fs-1">🔍</div>
+                            <h5 class="card-title mt-3">Biased Training Data</h5>
+                            <p class="card-text">Over-policing in minority neighborhoods skews arrest records,
+                                leading to misleading crime rate predictions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg h-100">
+                        <div class="card-body text-center">
+                            <div class="fs-1">⚖️</div>
+                            <h5 class="card-title mt-3">Proxy Discrimination</h5>
+                            <p class="card-text">Even when race is excluded, variables like ZIP code or prior
+                                arrests can act as hidden proxies, reinforcing bias.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg h-100">
+                        <div class="card-body text-center">
+                            <div class="fs-1">🔄</div>
+                            <h5 class="card-title mt-3">Feedback Loop</h5>
+                            <p class="card-text">Predictive models overestimate crime in minority areas, justifying
+                                more policing and creating a cycle of biased data.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="data" class="container my-5">
+            <h2>Data</h2>
+
+            <div class="row g-4">
+                <!-- Overview Card -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Dataset Overview</h3>
+                            <p class="card-text">
+                                Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising
+                                over 285,000 cases.
+                                This comprehensive dataset includes demographic information, criminal history, court
+                                proceedings, and pretrial outcomes,
+                                offering valuable insights into the pretrial release system in New York State.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Statistics -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Rearrest Outcomes</h3>
+                            <div class="text-center">
+                                <img src="assets/images/rearrest_distribution.png" class="img-fluid mb-3"
+                                    alt="Rearrest Distribution">
+                            </div>
+                            <p class="card-text">
+                                Analysis of pretrial outcomes shows:
+                            <ul>
+                                <li>83.7% - No rearrest during pretrial period</li>
+                                <li>8.1% - Misdemeanor rearrest</li>
+                                <li>6.0% - Non-violent felony rearrest</li>
+                                <li>2.2% - Violent felony rearrest</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demographic Analysis -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Demographic Distribution</h3>
+                            <div class="text-center">
+                                <img src="assets/images/demographic_distribution.png" class="img-fluid mb-3"
+                                    alt="Demographic Distribution">
+                            </div>
+                            <p class="card-text">
+                                The dataset reveals important demographic patterns:
+                            <ul>
+                                <li>Age: Majority of cases involve individuals aged 20-39</li>
+                                <li>Gender: Significant gender disparity in arrest rates</li>
+                                <li>Race/Ethnicity: Notable variations in pretrial outcomes across different groups</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geographic Distribution -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Geographic Distribution</h3>
+                            <div class="text-center">
+                                <img src="assets/images/geographic_distribution.png" class="img-fluid mb-3"
+                                    alt="Geographic Distribution">
+                            </div>
+                            <p class="card-text">
+                                Cases are distributed across New York State's judicial districts, with significant
+                                concentrations in:
+                            <ul>
+                                <li>New York City boroughs</li>
+                                <li>Major metropolitan areas</li>
+                                <li>Regional variations in case types and outcomes</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prior History Impact -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Impact of Prior History</h3>
+                            <div class="text-center">
+                                <img src="assets/images/prior_history_impact.png" class="img-fluid mb-3"
+                                    alt="Prior History Impact">
+                            </div>
+                            <p class="card-text">
+                                Analysis of prior criminal history reveals:
+                            <ul>
+                                <li>Correlation between prior offenses and pretrial outcomes</li>
+                                <li>Varying impact of different types of prior offenses</li>
+                                <li>Implications for risk assessment</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Quality Note -->
+                <div class="col-12">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Data Quality</h3>
+                            <p class="card-text">
+                                The dataset underwent thorough cleaning and preprocessing, including handling of missing
+                                values,
+                                standardization of categorical variables, and validation of temporal data. This ensures
+                                reliable
+                                analysis while maintaining transparency about data limitations and potential biases.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <div class="container py-4">
+            
+            <div class="d-flex justify-content-between mb-3">
+                <button id="prev-btn" class="btn btn-primary">&laquo; Previous</button>
+                <button id="next-btn" class="btn btn-primary">Next &raquo;</button>
+            </div>
+
+         
+            <div class="row">
+     
+                <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <div class="visualization border">
+                        <img id="visualization-img" src="" alt="Visualization" class="img-fluid w-100" />
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <div class="explanation border p-3">
+                        <h3 id="explanation-title"></h3>
+                        <p id="explanation-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+
+        <section id="model-development" class="container my-5">
+            <h2>Model Development</h2>
+            <p>This is the model development section.</p>
+        </section>
+
+        <section id="bias-mitigation" class="container my-5">
+            <h2>Bias Mitigation</h2>
+            <p>This is the bias mitigation section.</p>
+        </section>
+
+        <section id="conclusion" class="container my-5">
+            <h2>Conclusion & Discussion</h2>
+            <p>This is the conclusion and discussion section.</p>
+        </section>
+
+    </main>
+
+
+    <footer class="footer mt-auto py-3 bg-body-tertiary">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="text-body-secondary">Supported by UC San Diego Halıcıoğlu Data Science Institute</span>
+            <div>
+                <a href="" class="me-3 text-body-secondary" target="_blank" aria-label="Paper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-envelope-paper-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M6.5 9.5 3 7.5v-6A1.5 1.5 0 0 1 4.5 0h7A1.5 1.5 0 0 1 13 1.5v6l-3.5 2L8 8.75zM1.059 3.635 2 3.133v3.753L0 5.713V5.4a2 2 0 0 1 1.059-1.765M16 5.713l-2 1.173V3.133l.941.502A2 2 0 0 1 16 5.4zm0 1.16-5.693 3.337L16 13.372v-6.5Zm-8 3.199 7.941 4.412A2 2 0 0 1 14 16H2a2 2 0 0 1-1.941-1.516zm-8 3.3 5.693-3.162L0 6.873v6.5Z" />
+                    </svg>
+                </a>
+                <a href="https://github.com/cao1224/ucsd_capstone_project" class="text-body-secondary" target="_blank"
+                    aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-github" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+ -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
