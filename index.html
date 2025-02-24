@@ -11,7 +11,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Add Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -92,7 +92,8 @@
 
         <section id="introduction" class="container my-5">
             <h2 class="">Introduction</h2>
-            <p>The use of artificial intelligence in criminal justice, particularly in pretrial risk assessment, has
+            <p>The use of artificial intelligence (AI) in criminal justice, particularly in pretrial risk assessment,
+                has
                 raised concerns about bias. These algorithms predict the likelihood that a defendant will miss court or
                 reoffend, affecting decisions such as bail eligibility. While intended to reduce human bias, they often
                 reflect and amplify systemic inequalities in policing and arrest records. Ethical AI requires auditing
@@ -265,43 +266,436 @@
             </div>
         </section>
 
-        <!-- <div class="container py-4">
-            
-            <div class="d-flex justify-content-between mb-3">
-                <button id="prev-btn" class="btn btn-primary">&laquo; Previous</button>
-                <button id="next-btn" class="btn btn-primary">Next &raquo;</button>
-            </div>
-
-         
-            <div class="row">
-     
-                <div class="col-12 col-md-6 mb-3 mb-md-0">
-                    <div class="visualization border">
-                        <img id="visualization-img" src="" alt="Visualization" class="img-fluid w-100" />
-                    </div>
-                </div>
-
-
-                <div class="col-12 col-md-6">
-                    <div class="explanation border p-3">
-                        <h3 id="explanation-title"></h3>
-                        <p id="explanation-text"></p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
-
 
         <section id="model-development" class="container my-5">
             <h2>Model Development</h2>
-            <p>This is the model development section.</p>
+
+
+            <h4>Feature Engineering</h4>
+            <p>This is the feature engineering subsection.</p>
+
+            <h4>Random Forest Model Development</h4>
+            <p>This is the random forest model development subsection.</p>
+
+            <h4>Model Performance</h4>
+            <p>This is the model performance subsection.</p>
+
+            <h4>Feature Importance Analysis</h4>
+            <p>This is the model performance subsection.</p>
+
+            <h4>Addressing Imbalanced Labels</h4>
+            <!-- Expand/Collapse Buttons -->
+            <div class="d-flex justify-content-end my-2">
+                <button id="expandAllBtn" class="btn btn-success me-2">Expand All</button>
+                <button id="collapseAllBtn" class="btn btn-danger">Collapse All</button>
+            </div>
+
+            <!-- Bootstrap Accordion -->
+            <div class="accordion" id="accordionExample">
+                <!-- Accordion Item 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            1. Oversampling Techniques
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            We applied <strong>Random Oversampling</strong> and <strong>SMOTE (Synthetic Minority
+                                Over-sampling
+                                Technique)</strong>. SMOTE generates synthetic samples instead of duplicating existing
+                            ones,
+                            improving model generalization and preventing overfitting.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            2. Implementing SMOTE and Model Training
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            We used <strong>imbalanced_make_pipeline</strong> to integrate SMOTE with a <strong>Random
+                                Forest Classifier</strong>, setting <strong>class_weight='balanced'</strong> to adjust
+                            the model’s learning based on class distribution.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            3. Hyperparameter Tuning
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            We applied <strong>Stratified K-Fold Cross-Validation (k=5)</strong> and performed
+                            <strong>Grid Search</strong> to
+                            optimize <strong>n_estimators, max_depth, and random_state</strong>. Our final model
+                            prioritized recall
+                            for the minority class (reoffenders).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            4. Optimized Parameters
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Best parameters found: <strong>max_depth=6, n_estimators=200, random_state=13.</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            5. Results
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>After applying oversampling and fine-tuning, the model's ability to detect reoffenders
+                                (Class 1) improved. However, there were trade-offs in performance for non-reoffenders
+                                (Class 0).</p>
+
+                            <!-- Performance Table -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th></th>
+                                            <th class="class1-header">Recall (Class 1)</th>
+                                            <th class="class1-header">Precision (Class 1)</th>
+                                            <th class="class1-header">F1-Score (Class 1)</th>
+                                            <th class="class0-header">Recall (Class 0)</th>
+                                            <th class="class0-header">Precision (Class 0)</th>
+                                            <th class="class0-header">F1-Score (Class 0)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Before Fine-Tuning</strong></td>
+                                            <td>0.50</td>
+                                            <td>0.26</td>
+                                            <td>0.35</td>
+                                            <td>0.73</td>
+                                            <td>0.88</td>
+                                            <td>0.80</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>After Fine-Tuning</strong></td>
+                                            <td>0.66</td>
+                                            <td>0.26</td>
+                                            <td>0.38</td>
+                                            <td>0.63</td>
+                                            <td>0.90</td>
+                                            <td>0.75</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Summary Insights -->
+                            <strong>Summary Insights:</strong>
+                            <ul class="mt-3">
+                                <li><strong>Class 1 Improvement:</strong> Recall increased from 0.50 to 0.66, meaning
+                                    the model now captures more actual reoffenders.</li>
+                                <li><strong>Class 0 Trade-off:</strong> Precision slightly improved, but recall
+                                    decreased from 0.73 to 0.63.</li>
+                                <li><strong>Overall Balance:</strong> Balanced Accuracy improved to 0.6466, and the
+                                    ROC-AUC score increased to 0.6914.</li>
+                                <li>Fine-tuning resulted in a better trade-off between precision and recall, improving
+                                    the detection of reoffenders while maintaining reasonable accuracy for
+                                    non-reoffenders.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </section>
 
         <section id="bias-mitigation" class="container my-5">
             <h2>Bias Mitigation</h2>
-            <p>This is the bias mitigation section.</p>
+            <div class="row">
+                <!-- Pre-processing: Reweighing -->
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary text-center"><i class="bi bi-arrow-repeat"></i>
+                                Reweighing
+                                (Pre-processing)</h5>
+                            <p class="card-text">
+                                Reweighing assigns different weights to dataset instances based on group membership,
+                                ensuring
+                                that underrepresented groups contribute more significantly to the model’s learning
+                                process.
+                            </p>
+                            <p><strong>Key Steps:</strong></p>
+                            <ul>
+                                <li>Assigns weights based on group membership (Race = 0 as unprivileged, Race = 1 as
+                                    privileged).</li>
+                                <li>Transforms the dataset by adjusting sample weights.</li>
+                                <li>Trains the classifier on the reweighted dataset for fairer decision-making.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post-processing: Calibrated Equalized Odds -->
+                <div class="col-md-6">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title text-success text-center"><i class="bi bi-balance-scale"></i>
+                                Calibrated Equalized
+                                Odds (Post-processing)</h5>
+                            <p class="card-text">
+                                This method modifies model predictions after training to balance false positive and
+                                false negative rates across groups.
+                            </p>
+                            <p><strong>Key Steps:</strong></p>
+                            <ul>
+                                <li>Train the model on the original dataset (with oversampling applied).</li>
+                                <li>Apply AIF360’s calibration model to adjust predicted probabilities.</li>
+                                <li>Ensure balanced false positive and false negative rates across racial groups.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h4 class="my-4">Fairness Metrics: Impact of Reweighing</h4>
+
+            <!-- Summary Section -->
+            <p><strong>Before reweighing:</strong> Before applying reweighing, the model was trained on the original
+                dataset, which contained imbalances between the unprivileged and privileged groups. This led to
+                disparities in fairness metrics, particularly in 1-min(DI, 1/DI), Statistical Parity Difference, and
+                Average Odds Difference. The best Balanced Accuracy was achieved at a higher threshold of 0.49, but
+                fairness trade-offs were observed.
+
+            </p>
+            <p><strong>After reweighing:</strong> After applying reweighing, the training dataset was adjusted by
+                assigning different weights to instances based on group membership. This adjustment aimed to balance the
+                learning process and reduce disparities in fairness metrics. As a result, the best Balanced Accuracy was
+                achieved at a lower threshold (0.14), meaning the model needed less confidence to classify positive
+                cases. Fairness improved across key metrics.</p>
+
+            <!-- Expand/Collapse Buttons -->
+            <div class="d-flex justify-content-end my-2">
+                <button id="expandAllFairnessBtn" class="btn btn-success me-2">Expand All</button>
+                <button id="collapseAllFairnessBtn" class="btn btn-danger">Collapse All</button>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingBeforeWeighing">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseBeforeWeighing" aria-expanded="true"
+                            aria-controls="collapseBeforeWeighing">
+                            Fairness Metrics (Before Reweighing)
+                        </button>
+                    </h2>
+                    <div id="collapseBeforeWeighing" class="accordion-collapse-fairness collapse show"
+                        aria-labelledby="headingBeforeWeighing" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                <li><strong>Threshold:</strong> 0.49 [This means that at a classification threshold of
+                                    0.49, the model reached its highest balanced accuracy.]</li>
+                                <li><strong>Best Balanced Accuracy:</strong> 0.6469 [The model correctly classified both
+                                    groups 64.69% of the time.]</li>
+                                <li><strong>1-min(DI, 1/DI):</strong> 0.0928 [A higher value indicates more disparity in
+                                    disparate impact (DI).]</li>
+                                <li><strong>Average Odds Difference:</strong> 0.0248 [Measures the difference in true
+                                    positive rates and false positive rates across groups.
+                                    ]</li>
+                                <li><strong>Statistical Parity Difference:</strong> 0.0408 [Shows how much the
+                                    probability of a positive prediction differs between groups.]</li>
+                                <li><strong>Equal Opportunity Difference:</strong> 0.0059 [Measures the difference in
+                                    true positive rates across groups.]</li>
+                                <li><strong>Theil Index:</strong> 0.1159 [Measures overall inequality in predictions. A
+                                    lower value is preferred.]</li>
+                            </ul>
+                            <p><strong>Key Takeaway: </strong> The fairness metrics suggest that before applying
+                                reweighing, there was an imbalance in the way the model treated unprivileged and
+                                privileged groups, particularly in disparate impact and statistical parity.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAfterWeighing">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseAfterWeighing" aria-expanded="false"
+                            aria-controls="collapseAfterWeighing">
+                            Fairness Metrics (After Reweighing)
+                        </button>
+                    </h2>
+                    <div id="collapseAfterWeighing" class="accordion-collapse-fairness collapse"
+                        aria-labelledby="headingAfterWeighing" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                <li><strong>Threshold:</strong> 0.14 [The model now reaches its highest balanced
+                                    accuracy at a lower threshold, suggesting better calibration across groups.]</li>
+                                <li><strong>Best Balanced Accuracy:</strong> 0.6351 [A slight drop compared to before
+                                    (from 0.6469 to 0.6351), but fairness improved.]</li>
+                                <li><strong>1-min(DI, 1/DI):</strong> 0.0542 [Decreased from 0.0928, indicating reduced
+                                    disparity in disparate impact.]</li>
+                                <li><strong>Average Odds Difference:</strong> 0.0079 [Improved, meaning the model now
+                                    has a more balanced error rate across groups
+                                    ]</li>
+                                <li><strong>Statistical Parity Difference:</strong> 0.0235 [Lower than before, showing
+                                    improved fairness in the probability of a positive prediction across groups.]</li>
+                                <li><strong>Equal Opportunity Difference:</strong> -0.0107 [The change in equal
+                                    opportunity difference indicates that the model’s true positive rates are more
+                                    aligned across groups.]</li>
+                                <li><strong>Theil Index:</strong> 0.1193 [Slightly increased from 0.1159, suggesting a
+                                    small trade-off in entropy-based fairness.]</li>
+                            </ul>
+
+                            <p><strong>Key Takeaway: </strong> </p>
+                            <ul>
+                                <li>
+                                    Fairness improved across key metrics, particularly in disparate impact and average
+                                    odds difference.
+                                </li>
+                                <li>
+                                    Balanced Accuracy decreased slightly (from 64.69% to 63.51%), but this trade-off was
+                                    acceptable for improving fairness.
+                                </li>
+                                <li>
+                                    The lower classification threshold (from 0.49 to 0.14) suggests that the model now
+                                    requires less confidence to classify positive cases, ensuring more equal treatment
+                                    of both privileged and unprivileged groups.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="my-4">Fairness Metrics: Impact of Calibrated Equalized Odds Postprocessing</h4>
+            <!-- 📊 Before & After Postprocessing Data Tables -->
+            <div class="row my-4 ">
+                <!-- Before Postprocessing Table -->
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-lg p-3">
+                        <h6 class="card-title text-center">Before Postprocessing</h6>
+                        <table class="table table-bordered text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Dataset</th>
+                                    <th>GFPR Difference</th>
+                                    <th>GFNR Difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Train Set</td>
+                                    <td>0.0171</td>
+                                    <td>0.0001</td>
+                                </tr>
+                                <tr>
+                                    <td>Validation Set</td>
+                                    <td>0.0167</td>
+                                    <td>-0.0006</td>
+                                </tr>
+                                <tr>
+                                    <td>Test Set</td>
+                                    <td>0.0136</td>
+                                    <td>0.0024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-muted">Before postprocessing, the differences in <strong>false positive rates
+                                (GFPR)</strong> and <strong>false negative rates (GFNR)</strong> indicate
+                            <strong>disparities in model predictions</strong> across groups. The validation set shows a
+                            <strong>0.0167 GFPR difference</strong>, meaning privileged groups had a lower false
+                            positive rate than unprivileged groups. The <strong>GFNR difference is small</strong>, but
+                            even slight imbalances can affect fairness.</p>
+
+                    </div>
+                </div>
+
+                <!-- After Postprocessing Table -->
+                <div class="col-md-6">
+                    <div class="card shadow-lg p-3">
+                        <h6 class="card-title text-center">After Postprocessing</h6>
+                        <table class="table table-bordered text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Dataset</th>
+                                    <th>GFPR Difference</th>
+                                    <th>GFNR Difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Validation Set</td>
+                                    <td>0.0162</td>
+                                    <td>-0.0001</td>
+                                </tr>
+                                <tr>
+                                    <td>Test Set</td>
+                                    <td>0.0132</td>
+                                    <td>0.0031</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-muted">After postprocessing, <strong>GFPR differences reduced</strong>, with the
+                            test set showing an improved <strong>0.0132 GFPR difference</strong>. The <strong>GFNR
+                                difference slightly increased</strong> in the test set, but overall, disparities between
+                            groups <strong>decreased</strong>, ensuring that <strong>privileged and unprivileged groups
+                                were treated more equally</strong> in terms of misclassification rates.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <h5><strong>💡 Final Summary</strong></h5>
+            <ul>
+                <li>
+                    Before Reweighing → Higher accuracy, but fairness disparities in disparate impact & statistical
+                    parity.
+                </li>
+                <li>After Reweighing → Improved fairness, but a slight drop in accuracy due to balancing efforts.
+                </li>
+                <li>
+                    Main Trade-off: Fairness increased, but Theil Index showed minor fluctuation, indicating a small
+                    increase in prediction uncertainty.
+                </li>
+                <li>Fairness Improvement: GFPR and GFNR differences reduced after postprocessing.</li>
+                <li>Balanced Accuracy Trade-off: Postprocessing did not significantly impact
+                    balanced accuracy, meaning the model maintained its overall predictive performance.</li>
+                <li>Comparison with Reweighing: Unlike reweighing, which adjusts the training
+                    data, postprocessing modifies model predictions directly. This approach ensures fairness
+                    without altering data distributions, making it a better option for models deployed in
+                    production, where maintaining original data integrity is important. If fairness constraints must be met without
+                    modifying training data, postprocessing is preferable.</li>
+            </ul>
         </section>
 
         <section id="conclusion" class="container my-5">
@@ -335,7 +729,7 @@
         </div>
     </footer>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -344,8 +738,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
- -->
+
     <script src="script.js"></script>
+
+    <script>
+        const expandAllBtn = document.getElementById("expandAllBtn");
+        const collapseAllBtn = document.getElementById("collapseAllBtn");
+        const accordionItems = document.querySelectorAll(".accordion-collapse");
+
+        expandAllBtn.addEventListener("click", () => {
+            accordionItems.forEach(item => {
+                new bootstrap.Collapse(item, { toggle: false }).show();
+            });
+        });
+
+        collapseAllBtn.addEventListener("click", () => {
+            accordionItems.forEach(item => {
+                new bootstrap.Collapse(item, { toggle: false }).hide();
+            });
+        });
+
+        const expandAllFairnessBtn = document.getElementById("expandAllFairnessBtn");
+        const collapseAllFairnessBtn = document.getElementById("collapseAllFairnessBtn");
+        const accordionFairnessItems = document.querySelectorAll(".accordion-collapse-fairness");
+
+        expandAllFairnessBtn.addEventListener("click", () => {
+            accordionFairnessItems.forEach(item => {
+                new bootstrap.Collapse(item, { toggle: false }).show();
+            });
+        });
+
+        collapseAllFairnessBtn.addEventListener("click", () => {
+            accordionFairnessItems.forEach(item => {
+                new bootstrap.Collapse(item, { toggle: false }).hide();
+            });
+        });
+    </script>
+
 
 </body>
 

@@ -1,8 +1,34 @@
-/* styles.css */
+/* Class 1 (Reoffenders) - Light Red */
+.class1-header, .class1-data {
+  color: #721c24 !important;  /* Darker Red Text */
+}
 
-/* Styling for the visualization container */
-.visualization {
-    position: relative;
-    overflow: hidden;
-  }
-  
+/* Class 0 (Non-Reoffenders) - Light Blue */
+.class0-header, .class0-data {
+  color: #0c5460 !important;  /* Darker Blue Text */
+}
+
+
+.card {
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Custom colors */
+.text-primary {
+  color: #007bff !important;  /* Blue for Pre-processing */
+}
+
+.text-success {
+  color: #28a745 !important;  /* Green for Post-processing */
+}
+
+/* Accordion Button Styling */
+.accordion-button {
+  font-weight: bold;
+}
+

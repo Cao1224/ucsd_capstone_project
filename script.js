@@ -1,65 +1,31 @@
-// script.js
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Array of page data objects
-    const pages = [
+// Chart.js - Mean Outcome Differences Before & After Reweighing
+document.addEventListener("DOMContentLoaded", function () {
+  const ctx = document.getElementById("meanOutcomeChart").getContext("2d");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Train Set", "Validation Set", "Test Set", "Transformed (Reweighing)"],
+      datasets: [
         {
-            visualizationSrc: 'https://via.placeholder.com/600x400?text=Page+1',
-            explanationTitle: 'Dataset Overview',
-            explanationText: 'Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising over 285,000 cases. This comprehensive dataset includes demographic information, criminal history, court proceedings, and pretrial outcomes, offering valuable insights into the pretrial release system in New York State.'
-        },
-        {
-            visualizationSrc: 'assets/images/rearrest_distribution.png',
-            explanationTitle: 'Page 2 Explanation',
-            explanationText: 'This is the content for page 2. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-        },
-        {
-            visualizationSrc: 'https://via.placeholder.com/600x400?text=Page+3',
-            explanationTitle: 'Page 3 Explanation',
-            explanationText: 'This is the content for page 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+          label: "Before Reweighing",
+          data: [0.009, 0.008, 0.011, 0],  // Last value 0 represents transformed data
+          backgroundColor: ["#ff6384", "#ff6384", "#ff6384", "#36a2eb"],
+          borderColor: ["#ff6384", "#ff6384", "#ff6384", "#36a2eb"],
+          borderWidth: 1
         }
-        // Add more pages as needed
-    ];
-
-    let currentPageIndex = 0;
-
-    // Get references to DOM elements
-    const vizImg = document.getElementById('visualization-img');
-    const explanationTitle = document.getElementById('explanation-title');
-    const explanationText = document.getElementById('explanation-text');
-
-
-    // Function to load a page based on index
-    function loadPage(index) {
-        const page = pages[index];
-        vizImg.src = page.visualizationSrc;
-        explanationTitle.textContent = page.explanationTitle;
-        explanationText.textContent = page.explanationText;
-
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 0.015
+        }
+      }
     }
-
-
-
-    // Navigation: Previous button
-    document.getElementById('prev-btn').addEventListener('click', () => {
-        if (currentPageIndex > 0) {
-            currentPageIndex--;
-            loadPage(currentPageIndex);
-        } else {
-            alert("You're at the first page.");
-        }
-    });
-
-    // Navigation: Next button
-    document.getElementById('next-btn').addEventListener('click', () => {
-        if (currentPageIndex < pages.length - 1) {
-            currentPageIndex++;
-            loadPage(currentPageIndex);
-        } else {
-            alert("You're at the last page.");
-        }
-    });
-
-    // Load the initial page
-    loadPage(currentPageIndex);
+  });
 });
