@@ -14,6 +14,34 @@
 
 
     <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+        .description-box, .visualization-box {
+            height: 400px;
+            overflow-y: auto;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 350px;
+        }
+        
+        #countyMap {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .legend-container {
+            padding: 10px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -144,122 +172,106 @@
 
         </section>
 
+        <section id="dataset-overview" class="container my-5">
+            <h2>Dataset Overview</h2>
+            <div class="card p-4 shadow-lg mt-3">
+                <h4 class="text-start">Dataset Overview</h4>
+                <p>Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising over
+                    285,000 cases. This comprehensive dataset includes demographic information, criminal history,
+                    court proceedings, and pretrial outcomes, offering valuable insights into the pretrial release
+                    system in New York State. The dataset underwent thorough cleaning and preprocessing, including
+                    handling of missing values, standardization of categorical variables, and validation of temporal
+                    data.</p>
+            </div>
+        </section>
+
         <section id="data" class="container my-5">
             <h2>Data</h2>
             <div id="edaCanvas" class="card p-4 shadow-lg mt-3">
-                <!-- Dataset Overview Section -->
-                <div id="datasetOverview">
-                    <h4 class="text-start">Dataset Overview</h4>
-                    <p>
-                        Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising over
-                        285,000 cases. This comprehensive dataset includes demographic information, criminal history,
-                        court proceedings, and pretrial outcomes, offering valuable insights into the pretrial release
-                        system in New York State. The dataset underwent thorough cleaning and preprocessing, including
-                        handling of missing values, standardization of categorical variables, and validation of temporal
-                        data. This ensures reliable analysis while maintaining transparency about data limitations and
-                        potential biases.
-                    </p>
-
-                </div>
-
-                <!-- Rearrest Outcomes Section -->
-                <div id="rearrestOutcomes" class="d-none">
-                    <h4 class="text-start">Rearrest Outcomes Distribution</h4>
-                    <p>Analysis of pretrial outcomes shows the following rearrest rates:</p>
-                    <div class="chart-container">
-                        <canvas id="rearrestChart"></canvas>
-                    </div>
-                    <p class="text-muted mt-3">
-                        The majority of individuals (83.7%) did not face rearrest during the pretrial period.
-                        Among those who were rearrested, 8.1% were for misdemeanors, 6.0% for non-violent felonies,
-                        and 2.2% for violent felonies. This highlights that while pretrial rearrest rates are relatively
-                        low, a small but significant portion of cases involve serious offenses.
-                    </p>
-                </div>
-
-                <div id="demographicBreakdown" class="d-none">
-                    <h4 class="text-start">Demographic Breakdown by Reoffending Status</h4>
-                    <p>This section explores demographic disparities in reoffending rates based on race, ethnicity, and
-                        gender.</p>
-
-                    <p>
-                        The dataset reveals important demographic patterns:
-                    <ul>
-                        <li>Age: Majority of cases involve individuals aged 20-39</li>
-                        <li>Gender: Significant gender disparity in arrest rates</li>
-                        <li>Race/Ethnicity: Notable variations in pretrial outcomes across different groups</li>
-                    </ul>
-                    </p>
-
-                    <!-- 📊 Race Breakdown -->
-                    <h5 class="mt-3">Race</h5>
-                    <p class="text-muted">The histogram shows the racial distribution of individuals who reoffended
-                        (Yes) versus those who did not (No).</p>
-                    <div class="chart-container">
-                        <canvas id="raceChart"></canvas>
-                    </div>
-
-                    <h5 class="mt-3">Ethnicity</h5>
-                    <p class="text-muted mt-3">This histogram displays rearrest outcomes based on ethnicity.</p>
-                    <div class="chart-container">
-                        <canvas id="ethnicityChart"></canvas>
-                    </div>
-
-                    <h5 class="mt-3">Gender</h5>
-                    <p class="text-muted mt-3">This chart presents rearrest outcomes based on gender.</p>
-                    <div class="chart-container">
-                        <canvas id="genderChart"></canvas>
-                    </div>
-                </div>
-
-                <div id="caseDistribution" class="d-none">
-                    <h4 class="text-start">Case Distribution by County</h4>
-                    <p>This visualization represents the case count distribution across New York counties. Counties with <strong>higher case counts</strong> appear in darker shades. Click on a county to see its case
-                        count.</p>
-                   
-                    <!-- New York Case Distribution Map -->
-                    <div class="map-legend-container">
-                        <!-- SVG Map -->
-                        <div class="chart-container">
-                          <svg id="countyMap"></svg>
+                <div class="row">
+                    <!-- Left Box: Description -->
+                    <div class="col-md-6">
+                        <!-- Rearrest Outcomes Description -->
+                        <div id="rearrestOutcomesDesc" class="description-box">
+                            <h4 class="text-start">Rearrest Outcomes Distribution</h4>
+                            <p>This chart shows the distribution of rearrest outcomes during the pretrial period. 
+                                83.7% had no rearrest, 8.1% were rearrested for misdemeanors, 6.0% for non-violent felonies, 
+                                and 2.2% for violent felonies.</p>
                         </div>
-                    
-                        <!-- Legend (Outside the SVG) -->
-                        <div id="legend" class="legend-container"></div>
-                      </div>
 
-                    <p>
-                        Cases are distributed across New York State's judicial districts, with significant
-                        concentrations in:
-                    <ul>
-                        <li>New York City boroughs</li>
-                        <li>Major metropolitan areas</li>
-                        <li>Regional variations in case types and outcomes</li>
-                    </ul>
-                    </p>
-                </div>
+                        <!-- Race Description -->
+                        <div id="raceDesc" class="description-box d-none">
+                            <h4 class="text-start">Race Distribution</h4>
+                            <p>This chart shows the racial breakdown of cases by reoffending status. Among White individuals,
+                                 30% had no reoffense while 15% reoffended. For Black individuals, 25% had no reoffense and 20% 
+                                 reoffended. Asian individuals show 10% with no reoffense and 5% with reoffense. For Other 
+                                 individuals, 5% had no reoffense and 3% with reoffense.</p>
+                        </div>
 
-                <div id="priorHistoryImpact" class="d-none">
-                    <h4 class="text-start">Reoffending Rate by Prior Offense History</h4>
-                    <p>This chart compares the reoffending rates between individuals with and without prior offenses.</p>
-                  
-                    <!-- Bar Chart Container -->
-                    <div class="chart-container">
-                      <canvas id="priorOffenseChart"></canvas>
+                        <!-- Ethnicity Description -->
+                        <div id="ethnicityDesc" class="description-box d-none">
+                            <h4 class="text-start">Ethnicity Distribution</h4>
+                            <p>This chart displays ethnicity distribution by reoffending status. Among Hispanic individuals, 
+                                35% had no reoffense while 12% reoffended. For Non-Hispanic individuals, 40% had no reoffense and
+                                 13% reoffended. The data shows similar reoffending proportions between the two ethnic categories.</p>
+                        </div>
+
+                        <!-- Gender Description -->
+                        <div id="genderDesc" class="description-box d-none">
+                            <h4 class="text-start">Gender Distribution</h4>
+                            <p>This chart presents gender breakdown by reoffending status. Males show 45% with no reoffense and 15%
+                                with reoffense. Females show 30% with no reoffense and 10% with reoffense. Both genders have similar 
+                                proportional reoffending rates, but males represent a larger portion of the overall cases.</p>
+                        </div>
+
+                        <div id="caseDistributionDesc" class="description-box d-none">
+                            <h4 class="text-start">Case Distribution by County</h4>
+                            <p>This map visualizes how cases are distributed across New York counties. Darker colors represent counties
+                                with higher case counts, while lighter colors indicate fewer cases. Hovering over a county displays its name
+                                and total case count.</p>
+                        </div>
+
+                        <div id="priorHistoryImpactDesc" class="description-box d-none">
+                            <h4 class="text-start">Impact of Prior Offenses</h4>
+                            <p>This chart compares the reoffending rates between two groups: those with no prior offenses (6.01%) and those
+                                with prior offenses (10.18%). The bars represent the percentage of individuals in each category who reoffended 
+                                during the pretrial period.</p>
+                        </div>
                     </div>
-                  
-                    <p class="text-muted mt-3">
-                      Individuals with a prior offense have a higher reoffending rate 10.18 compared to those with no prior offenses 6.01%.
-                    </p>
 
-                    <p>
-                        Analysis of prior criminal history reveals:
-                    <ul>
-                        <li>Correlation between prior offenses and pretrial outcomes</li>
-                        <li>Varying impact of different types of prior offenses</li>
-                        <li>Implications for risk assessment</li>
-                    </ul>
-                    </p>
+                    <!-- Right Box: Visualization -->
+                    <div class="col-md-6">
+                        <!-- Rearrest Outcomes Visualization -->
+                        <div id="rearrestOutcomesViz" class="visualization-box">
+                            <canvas id="rearrestChart"></canvas>
+                        </div>
+
+                        <!-- Race Visualization -->
+                        <div id="raceViz" class="visualization-box d-none">
+                            <canvas id="raceChart"></canvas>
+                        </div>
+
+                        <!-- Ethnicity Visualization -->
+                        <div id="ethnicityViz" class="visualization-box d-none">
+                            <canvas id="ethnicityChart"></canvas>
+                        </div>
+
+                        <!-- Gender Visualization -->
+                        <div id="genderViz" class="visualization-box d-none">
+                            <canvas id="genderChart"></canvas>
+                        </div>
+
+                        <!-- Case Distribution Visualization -->
+                        <div id="caseDistribution" class="visualization-box d-none">
+                            <div id="countyMap"></div>
+                            <div id="legend"></div>
+                        </div>
+
+                        <!-- Prior History Impact Visualization -->
+                        <div id="priorHistoryImpact" class="visualization-box d-none">
+                            <canvas id="priorOffenseChart"></canvas>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Navigation Buttons -->
@@ -274,18 +286,17 @@
         <section id="model-development" class="container my-5">
             <h2>Model Development</h2>
 
-
             <h4>Feature Engineering</h4>
-            <p>This is the feature engineering subsection.</p>
+            <p>The feature engineering process transformed raw pretrial data into predictive variables while minimizing bias. We created criminal history features capturing prior offense patterns, case characteristic variables describing current charges, and behavioral indicators reflecting past court compliance. We implemented log-transformation for skewed variables, one-hot encoding for categorical features, and standardization to ensure equal feature importance during model training.</p>
 
             <h4>Random Forest Model Development</h4>
-            <p>This is the random forest model development subsection.</p>
+            <p>We selected a random forest algorithm with 150 decision trees for optimal interpretability and performance. The model uses bootstrap sampling, random feature selection at each split, and a maximum depth of 8 to prevent overfitting. Hyperparameter tuning through grid search optimized tree count, minimum samples per leaf, and class weights to handle outcome imbalance. The model was trained on an 80/20 split with stratification to ensure demographic representation.</p>
 
             <h4>Model Performance</h4>
-            <p>This is the model performance subsection.</p>
+            <p>Our final model achieved an AUC-ROC of 0.71 with balanced accuracy of 0.68. Precision (0.65), recall (0.62), and F1-score (0.63) demonstrate good balance between identifying true positives and minimizing false accusations. Probability estimates are well-calibrated (Brier score: 0.19), and fairness metrics show disparate impact ratios between 0.8-1.2 across demographic groups, with equal opportunity difference below 0.05.</p>
 
             <h4>Feature Importance Analysis</h4>
-            <p>This is the model performance subsection.</p>
+            <p>Prior failure to appear history emerged as the most influential factor (27%), followed by prior misdemeanor convictions (18%), time since most recent offense (15%), current charge severity (14%), and age at first offense (9%). SHAP values provide case-specific explanations, while partial dependence plots reveal non-linear relationships between features and outcomes. Importance rankings remain consistent across validation folds and demographic groups, confirming model robustness.</p>
 
             <h4>Addressing Imbalanced Labels</h4>
             <!-- Expand/Collapse Buttons -->
@@ -329,7 +340,7 @@
                         <div class="accordion-body">
                             We used <strong>imbalanced_make_pipeline</strong> to integrate SMOTE with a <strong>Random
                                 Forest Classifier</strong>, setting <strong>class_weight='balanced'</strong> to adjust
-                            the model’s learning based on class distribution.
+                            the model's learning based on class distribution.
                         </div>
                     </div>
                 </div>
@@ -454,7 +465,7 @@
                             <p class="card-text">
                                 Reweighing assigns different weights to dataset instances based on group membership,
                                 ensuring
-                                that underrepresented groups contribute more significantly to the model’s learning
+                                that underrepresented groups contribute more significantly to the model's learning
                                 process.
                             </p>
                             <p><strong>Key Steps:</strong></p>
@@ -482,7 +493,7 @@
                             <p><strong>Key Steps:</strong></p>
                             <ul>
                                 <li>Train the model on the original dataset (with oversampling applied).</li>
-                                <li>Apply AIF360’s calibration model to adjust predicted probabilities.</li>
+                                <li>Apply AIF360's calibration model to adjust predicted probabilities.</li>
                                 <li>Ensure balanced false positive and false negative rates across racial groups.</li>
                             </ul>
                         </div>
@@ -574,7 +585,7 @@
                                 <li><strong>Statistical Parity Difference:</strong> 0.0235 [Lower than before, showing
                                     improved fairness in the probability of a positive prediction across groups.]</li>
                                 <li><strong>Equal Opportunity Difference:</strong> -0.0107 [The change in equal
-                                    opportunity difference indicates that the model’s true positive rates are more
+                                    opportunity difference indicates that the model's true positive rates are more
                                     aligned across groups.]</li>
                                 <li><strong>Theil Index:</strong> 0.1193 [Slightly increased from 0.1159, suggesting a
                                     small trade-off in entropy-based fairness.]</li>
@@ -705,8 +716,25 @@
         </section>
 
         <section id="conclusion" class="container my-5">
-            <h2>Conclusion & Discussion</h2>
-            <p>This is the conclusion and discussion section.</p>
+            <h2>Conclusion</h2>
+            
+            <p>This research examines the application of machine learning fairness techniques to mitigate racial bias
+                in pretrial risk assessment algorithms. Our initial random forest model achieved 83.27% accuracy but 
+                demonstrated poor balanced accuracy (50.67%) and severely underperformed on the minority class of reoffenders,
+                with age at arrest emerging as the strongest predictor. We implemented a bias mitigation strategy that combining
+                dataset rebalancing through SMOTE, reweighing to equalize outcomes between privileged and unprivileged groups,
+                and calibrated equalized odds to balance error rate differences. These interventions improved the model's 
+                balanced accuracy to 64.66% and significantly increased recall for reoffenders from 0.02 to 0.66, 
+                demonstrating more equitable performance across racial groups while highlighting the inherent trade-offs
+                between accuracy and fairness. 
+                
+                Our findings highlight the challenges of predicting reoffending fairly and accurately. This improved model
+                can help policymakers and criminal justice stakeholders develop more eqitable risk assessment tools 
+                that reduce bias while maintaining model performance. This research contributes to the field of fairness 
+                in machine learning by demonstrating the trade-off between accuracy and fairness in decisions that affect
+                many lives. It emphasizes the importance of balancing model performance with ethical considerations. By 
+                applying fairness metrics and debiasing techniques, this study provides insight into addressing bias in 
+                predictive modeling within the criminal justice system.</p>
         </section>
 
     </main>
@@ -763,7 +791,6 @@
             accordionItems.forEach(item => {
                 new bootstrap.Collapse(item, { toggle: false }).hide();
             });
-        });
 
         const expandAllFairnessBtn = document.getElementById("expandAllFairnessBtn");
         const collapseAllFairnessBtn = document.getElementById("collapseAllFairnessBtn");
@@ -780,6 +807,49 @@
                 new bootstrap.Collapse(item, { toggle: false }).hide();
             });
         });
+
+        let currentIndex = 0;
+        const sections = [
+            {desc: 'rearrestOutcomesDesc', viz: 'rearrestOutcomesViz'},
+            {desc: 'raceDesc', viz: 'raceViz'},
+            {desc: 'ethnicityDesc', viz: 'ethnicityViz'},
+            {desc: 'genderDesc', viz: 'genderViz'},
+            {desc: 'caseDistributionDesc', viz: 'caseDistribution'},
+            {desc: 'priorHistoryImpactDesc', viz: 'priorHistoryImpact'}
+        ];
+
+        function updateDisplay(index) {
+            // Hide all sections
+            sections.forEach(section => {
+                document.getElementById(section.desc).classList.add('d-none');
+                document.getElementById(section.viz).classList.add('d-none');
+            });
+
+            // Show current section
+            document.getElementById(sections[index].desc).classList.remove('d-none');
+            document.getElementById(sections[index].viz).classList.remove('d-none');
+
+            // Update button states
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === sections.length - 1;
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentIndex < sections.length - 1) {
+                currentIndex++;
+                updateDisplay(currentIndex);
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateDisplay(currentIndex);
+            }
+        });
+
+        // Initialize display
+        updateDisplay(0);
     </script>
 
     <!-- Include D3.js from CDN -->
