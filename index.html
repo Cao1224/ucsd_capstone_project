@@ -287,16 +287,49 @@
             <h2>Model Development</h2>
 
             <h4>Feature Engineering</h4>
-            <p>The feature engineering process transformed raw pretrial data into predictive variables while minimizing bias. We created criminal history features capturing prior offense patterns, case characteristic variables describing current charges, and behavioral indicators reflecting past court compliance. We implemented log-transformation for skewed variables, one-hot encoding for categorical features, and standardization to ensure equal feature importance during model training.</p>
+            <p>The feature engineering process transformed raw pretrial data into predictive 
+                variables while minimizing bias. We created criminal history features 
+                capturing prior offense patterns, case characteristic variables describing 
+                current charges, and behavioral indicators reflecting past court compliance.
+                 We implemented log-transformation for skewed variables, one-hot encoding for 
+                 categorical features, and standardization to ensure equal feature importance 
+                 during model training.</p>
 
             <h4>Random Forest Model Development</h4>
-            <p>We selected a random forest algorithm with 150 decision trees for optimal interpretability and performance. The model uses bootstrap sampling, random feature selection at each split, and a maximum depth of 8 to prevent overfitting. Hyperparameter tuning through grid search optimized tree count, minimum samples per leaf, and class weights to handle outcome imbalance. The model was trained on an 80/20 split with stratification to ensure demographic representation.</p>
+            <p>Our Random Forest Classifier used 100 trees and was trained on seven key features
+                 selected for predicting pretrial reoffending. The model handled both numerical and 
+                 categorical data effectively while capturing complex feature interactions.</p>
+        
+            <p>We binarized prior criminal history variables, converting count-based features
+                into binary indicators (e.g., prior_misd_binary, prior_vfo_binary). The model
+                was trained on a 50-30-20 split (training, validation, test), ensuring a 
+                balanced evaluation.</p>
+            
+            <p>Hyperparameters included max_depth=6, n_estimators=100, and random_state=42 
+                for reproducibility. The entropy criterion was used to maximize information
+                gain, enhancing prediction reliability.</p>
 
             <h4>Model Performance</h4>
-            <p>Our final model achieved an AUC-ROC of 0.71 with balanced accuracy of 0.68. Precision (0.65), recall (0.62), and F1-score (0.63) demonstrate good balance between identifying true positives and minimizing false accusations. Probability estimates are well-calibrated (Brier score: 0.19), and fairness metrics show disparate impact ratios between 0.8-1.2 across demographic groups, with equal opportunity difference below 0.05.</p>
+            <p>The Random Forest model achieved 83.27% overall accuracy, but balanced accuracy
+                was only 50.67%, indicating poor performance on the minority class.</p>
+            
+            <p>For non-reoffenders (Class 0), the model performed well (precision: 0.84, 
+                recall: 0.99, F1-score: 0.91). However, for reoffenders (Class 1), recall 
+                was extremely low (0.02), meaning most reoffenders were misclassified. 
+                The ROC-AUC score was 0.6914, showing moderate discriminatory power.</p>
+            
+            <p>The model's imbalance favored non-reoffenders, highlighting the need for bias mitigation techniques to improve fairness and recall for reoffenders.</p>
 
             <h4>Feature Importance Analysis</h4>
-            <p>Prior failure to appear history emerged as the most influential factor (27%), followed by prior misdemeanor convictions (18%), time since most recent offense (15%), current charge severity (14%), and age at first offense (9%). SHAP values provide case-specific explanations, while partial dependence plots reveal non-linear relationships between features and outcomes. Importance rankings remain consistent across validation folds and demographic groups, confirming model robustness.</p>
+            <p>Feature importance analysis revealed that the strongest predictors were:</p>
+            
+            <ul>
+                <li>Age at Arrest - 48%</li>
+                <li>Pending Misdemeanor Charges - 21%</li>
+                <li>Pending Non-Violent Felony Charges - 11%</li>
+                <li>Prior Misdemeanor Convictions - 7%</li>
+                <li>Prior Non-Violent Felony Convictions - 3%</li>
+            </ul>
 
             <h4>Addressing Imbalanced Labels</h4>
             <!-- Expand/Collapse Buttons -->
