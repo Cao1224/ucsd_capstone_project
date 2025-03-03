@@ -1,21 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const datasetOverview = document.getElementById("datasetOverview");
-  const rearrestOutcomes = document.getElementById("rearrestOutcomes");
-  const demographicBreakdown = document.getElementById("demographicBreakdown");
-  const caseDistribution = document.getElementById("caseDistribution");
-  const priorHistoryImpact = document.getElementById("priorHistoryImpact");
-
   // Setup for the data section visualization navigation
   let currentVizIndex = 0;
   const sections = [
-    {desc: 'rearrestOutcomesDesc', viz: 'rearrestOutcomesViz'},
-    {desc: 'raceDesc', viz: 'raceViz'},
-    {desc: 'ethnicityDesc', viz: 'ethnicityViz'},
-    {desc: 'genderDesc', viz: 'genderViz'},
-    {desc: 'caseDistributionDesc', viz: 'caseDistribution'},
-    {desc: 'priorHistoryImpactDesc', viz: 'priorHistoryImpact'}
+    { desc: 'rearrestOutcomesDesc', viz: 'rearrestOutcomesViz' },
+    { desc: 'raceDesc', viz: 'raceViz' },
+    { desc: 'ethnicityDesc', viz: 'ethnicityViz' },
+    { desc: 'genderDesc', viz: 'genderViz' },
+    { desc: 'caseDistributionDesc', viz: 'caseDistribution' },
+    { desc: 'priorHistoryImpactDesc', viz: 'priorHistoryImpact' }
   ];
-  
+
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
 
@@ -25,131 +19,44 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById(section.desc)?.classList.add('d-none');
       document.getElementById(section.viz)?.classList.add('d-none');
     });
-    
+
     // Show current section
     document.getElementById(sections[currentVizIndex].desc)?.classList.remove('d-none');
     document.getElementById(sections[currentVizIndex].viz)?.classList.remove('d-none');
-    
+
     // Update button states
     prevBtn.disabled = currentVizIndex === 0;
     nextBtn.disabled = currentVizIndex === sections.length - 1;
   }
-  
+
   // Button click handlers
   if (prevBtn) {
-    prevBtn.addEventListener("click", function() {
+    prevBtn.addEventListener("click", function () {
       if (currentVizIndex > 0) {
         currentVizIndex--;
         updateDataVisualization();
       }
     });
   }
-  
+
   if (nextBtn) {
-    nextBtn.addEventListener("click", function() {
+    nextBtn.addEventListener("click", function () {
       if (currentVizIndex < sections.length - 1) {
         currentVizIndex++;
         updateDataVisualization();
       }
     });
   }
-  
+
   // Initialize the visualization
   updateDataVisualization();
-  
+
   // Initialize charts
   initializeCharts();
-  
-  // Fix for map not showing - directly set dimensions
-  const mapContainer = document.getElementById('countyMap');
-  if (mapContainer) {
-    const svgWidth = 500;
-    const svgHeight = 350;
-    
-    // Set explicit size for the SVG
-    d3.select("#countyMap")
-      .attr("width", svgWidth)
-      .attr("height", svgHeight);
-    
-    // Load the map with these fixed dimensions
-    loadCountyMap(svgWidth, svgHeight);
-  }
-  
-  // Add toggle functionality for accordion headers
-  const accordionHeaders = document.querySelectorAll('[data-bs-toggle="collapse"]');
-  
-  accordionHeaders.forEach(header => {
-    header.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('data-bs-target');
-      const targetCollapse = document.querySelector(targetId);
-      
-      if (targetCollapse) {
-        // Check if it's currently shown
-        const isShown = targetCollapse.classList.contains('show');
-        
-        // Toggle the collapse state
-        if (isShown) {
-          // If it's open, close it
-          new bootstrap.Collapse(targetCollapse).hide();
-        } else {
-          // If it's closed, open it
-          new bootstrap.Collapse(targetCollapse).show();
-        }
-      }
-    });
-  });
-
-  // Fix for the expand/collapse all buttons
-  const expandAllBtn = document.getElementById("expandAllBtn");
-  const collapseAllBtn = document.getElementById("collapseAllBtn");
-  const accordionItems = document.querySelectorAll(".accordion-collapse");
-  
-  if (expandAllBtn) {
-    expandAllBtn.addEventListener("click", () => {
-      accordionItems.forEach(item => {
-        // Create a new Bootstrap collapse instance and show it
-        const bsCollapse = new bootstrap.Collapse(item, { toggle: false });
-        bsCollapse.show();
-      });
-    });
-  }
-  
-  if (collapseAllBtn) {
-    collapseAllBtn.addEventListener("click", () => {
-      accordionItems.forEach(item => {
-        // Create a new Bootstrap collapse instance and hide it
-        const bsCollapse = new bootstrap.Collapse(item, { toggle: false });
-        bsCollapse.hide();
-      });
-    });
-  }
-  
-  // Fix for fairness expand/collapse buttons
-  const expandAllFairnessBtn = document.getElementById("expandAllFairnessBtn");
-  const collapseAllFairnessBtn = document.getElementById("collapseAllFairnessBtn");
-  const accordionFairnessItems = document.querySelectorAll(".accordion-collapse-fairness");
-  
-  if (expandAllFairnessBtn) {
-    expandAllFairnessBtn.addEventListener("click", () => {
-      accordionFairnessItems.forEach(item => {
-        const bsCollapse = new bootstrap.Collapse(item, { toggle: false });
-        bsCollapse.show();
-      });
-    });
-  }
-  
-  if (collapseAllFairnessBtn) {
-    collapseAllFairnessBtn.addEventListener("click", () => {
-      accordionFairnessItems.forEach(item => {
-        const bsCollapse = new bootstrap.Collapse(item, { toggle: false });
-        bsCollapse.hide();
-      });
-    });
-  }
 
   window.addEventListener("resize", () => getContainerSize(null));
+
+
 });
 
 function initializeCharts() {
@@ -163,7 +70,7 @@ function initializeCharts() {
         datasets: [{
           label: 'Percentage (%)',
           data: [83.7, 8.1, 6.0, 2.2],
-          backgroundColor: '#000000'
+          backgroundColor: '#898989'
         }]
       },
       options: {
@@ -172,6 +79,9 @@ function initializeCharts() {
           title: {
             display: true,
             text: 'Rearrest Outcomes Distribution (%)'
+          },
+          legend: {
+            display: false
           }
         },
         scales: {
@@ -197,11 +107,11 @@ function initializeCharts() {
         datasets: [{
           label: 'No Reoffense',
           data: [30, 25, 10, 5],
-          backgroundColor: '#4CAF50'
+          backgroundColor: "#3374a1"
         }, {
           label: 'Reoffense',
           data: [15, 20, 5, 3],
-          backgroundColor: '#F44336'
+          backgroundColor: "#e1812c"
         }]
       },
       options: {
@@ -235,11 +145,11 @@ function initializeCharts() {
         datasets: [{
           label: 'No Reoffense',
           data: [35, 40],
-          backgroundColor: '#4CAF50'
+          backgroundColor: "#3374a1"
         }, {
           label: 'Reoffense',
           data: [12, 13],
-          backgroundColor: '#F44336'
+          backgroundColor: "#e1812c"
         }]
       },
       options: {
@@ -273,11 +183,11 @@ function initializeCharts() {
         datasets: [{
           label: 'No Reoffense',
           data: [45, 30],
-          backgroundColor: '#4CAF50'
+          backgroundColor: "#3374a1"
         }, {
           label: 'Reoffense',
           data: [15, 10],
-          backgroundColor: '#F44336'
+          backgroundColor: "#e1812c"
         }]
       },
       options: {
@@ -311,7 +221,7 @@ function initializeCharts() {
         datasets: [{
           label: 'Reoffending Rate (%)',
           data: [6.01, 10.18],
-          backgroundColor: ['#4CAF50', '#F44336']
+          backgroundColor: ["#3374a1", "#e1812c"]
         }]
       },
       options: {
@@ -329,12 +239,16 @@ function initializeCharts() {
           title: {
             display: true,
             text: 'Reoffending Rate by Prior Offense History'
+          },
+          legend: {
+            display: false
           }
         }
       }
     });
   }
 }
+
 
 function getContainerSize(callback) {
   const container = document.querySelector(".chart-container");
@@ -428,93 +342,77 @@ const countyCases = {
   "Yates County": 54
 }
 
-const tooltip = d3.select("body").append("div")
-  .attr("class", "tooltip");
 
-// Function to load the county map with fixed dimensions
-function loadCountyMap(width, height) {
+// Tooltip for displaying case count
+const tooltip = d3.select("body").append("div").attr("class", "tooltip");
+
+getContainerSize((width, height) => {
+  // Now we have valid width and height, we can load the map
+  d3.json("assets/new-york-counties.geojson").then(function (geoData) {
+    
     const svg = d3.select("#countyMap")
-        .attr("width", width)
-        .attr("height", height);
-        
-    svg.html("");
-        
-    // Load GeoJSON data
-    d3.json("assets/new-york-counties.geojson")
-        .then(function(geoData) {
-            const projection = d3.geoMercator()
-                .fitSize([width, height], geoData);
-                
-            const path = d3.geoPath()
-                .projection(projection);
-                
-            // Draw counties
-            svg.selectAll("path")
-                .data(geoData.features)
-                .enter()
-                .append("path")
-                .attr("d", path)
-                .attr("fill", function(d) {
-                    const count = countyCases[d.properties.name] || 0;
-                    return colorScale(count);
-                })
-                .attr("stroke", "#fff")
-                .attr("stroke-width", 1)
-                .on("mouseover", function(event, d) {
-                    const countyName = d.properties.name;
-                    const caseCount = countyCases[countyName] || "No Data";
-                    d3.select(this).attr("fill", "#4292c6");
-                    
-                    // Show tooltip
-                    d3.select("#tooltip")
-                        .style("display", "block")
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 10) + "px")
-                        .html(`<strong>${countyName}</strong><br>Cases: ${caseCount}`);
-                })
-                .on("mouseout", function() {
-                    const d = d3.select(this).datum();
-                    const count = countyCases[d.properties.name] || 0;
-                    d3.select(this).attr("fill", colorScale(count));
-                    
-                    // Hide tooltip
-                    d3.select("#tooltip").style("display", "none");
-                });
-                
-            // Create legend
-            createLegend();
-            
-        })
-        .catch(function(error) {
-            // Leave blank if doesn't load - no error message
-            document.getElementById("countyMap").innerHTML = "";
-        });
-}
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", `0 0 ${width} ${height}`) // Ensures scaling
+      .attr("preserveAspectRatio", "xMidYMid meet"); // Keeps aspect ratio
 
-function createLegend() {
-  const legendData = [500, 1000, 5000, 10000, 20000, 40000];
-  const legendContainer = d3.select("#legend");
-  
-  // Clear existing legend
-  legendContainer.html("");
-  
-  legendContainer.selectAll(".legend-item")
-    .data(legendData)
-    .enter()
-    .append("div")
-    .attr("class", "legend-item")
-    .style("display", "flex")
-    .style("align-items", "center")
-    .style("margin-bottom", "5px")
-    .html(d => `
-      <div style="width: 20px; height: 20px; background-color: ${colorScale(d)}; margin-right: 8px;"></div>
-      <span>${d.toLocaleString()}+ cases</span>
-    `);
-}
+    const projection = d3.geoMercator();
+    const path = d3.geoPath().projection(projection);
 
-document.body.insertAdjacentHTML('beforeend', `
-  <div id="tooltip" style="position: absolute; display: none; background: white; 
-       padding: 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
-       pointer-events: none; z-index: 1000;">
-  </div>
-`);
+    // Fit projection into container
+    projection.fitExtent([[10, 10], [width - 10, height - 10]], geoData);
+
+    // Create a `g` group element to apply transformations
+    const g = svg.append("g");
+
+    // Draw counties
+    g.selectAll("path")
+      .data(geoData.features)
+      .enter().append("path")
+      .attr("d", path)
+      .attr("fill", function (d) {
+        const count = countyCases[d.properties.name] || 0;
+        return colorScale(count);
+      })
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 1)
+      .on("mouseover", function (event, d) {
+        const countyName = d.properties.name;
+        const caseCount = countyCases[countyName] || "No Data";
+        tooltip.style("opacity", 1)
+          .html(`<strong>${countyName}</strong><br>Cases: ${caseCount}`)
+          .style("left", (event.pageX + 10) + "px")
+          .style("top", (event.pageY - 10) + "px");
+      })
+      .on("mousemove", function (event) {
+        tooltip.style("left", (event.pageX + 10) + "px")
+          .style("top", (event.pageY - 10) + "px");
+      })
+      .on("mouseout", function () {
+        tooltip.style("opacity", 0);
+      });
+
+      const legendData = [500, 1000, 5000, 10000, 20000, 40000];
+      const legendContainer = d3.select("#legend");
+
+      const legendItems = legendContainer.selectAll(".legend-item")
+        .data(legendData)
+        .enter().append("div")
+        .attr("class", "legend-item")
+        .style("display", "flex")
+        .style("align-items", "center")
+        .style("gap", "8px");
+
+      // Color Boxes
+      legendItems.append("div")
+        .style("width", "20px")
+        .style("height", "20px")
+        .style("background-color", d => colorScale(d));
+
+      // Labels
+      legendItems.append("span")
+        .text(d => `${d}+`);
+
+  });
+   
+});

@@ -11,37 +11,9 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Add Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
     <link rel="stylesheet" href="assets/styles.css" />
-    <style>
-        .description-box, .visualization-box {
-            height: 400px;
-            overflow-y: auto;
-        }
-        
-        .map-container {
-            width: 100%;
-            height: 350px;
-        }
-        
-        #countyMap {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .legend-container {
-            padding: 10px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 12px;
-        }
-        
-        .legend-item {
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -136,7 +108,7 @@
             <div class="row g-4">
 
                 <div class="col-md-4">
-                    <div class="card shadow-lg h-100">
+                    <div class="card h-100">
                         <div class="card-body text-center">
                             <div class="fs-1">🔍</div>
                             <h5 class="card-title mt-3">Biased Training Data</h5>
@@ -147,7 +119,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card shadow-lg h-100">
+                    <div class="card h-100">
                         <div class="card-body text-center">
                             <div class="fs-1">⚖️</div>
                             <h5 class="card-title mt-3">Proxy Discrimination</h5>
@@ -158,7 +130,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card shadow-lg h-100">
+                    <div class="card h-100">
                         <div class="card-body text-center">
                             <div class="fs-1">🔄</div>
                             <h5 class="card-title mt-3">Feedback Loop</h5>
@@ -170,71 +142,92 @@
 
             </div>
 
+            <p class="my-4">
+                This work examines racial bias in pretrial risk assessments, where "reoffend" labels, often based on
+                rearrest rates, misrepresent actual criminal behavior due to systemic policing biases. Black
+                individuals, for example, face higher arrest rates for minor offenses than White individuals. Using
+                Scikit-learn and AIF360 (AI Fairness 360), we audit and mitigate bias across the machine learning
+                pipeline. Pre-processing techniques rebalance training data, while post-processing adjustments calibrate
+                decision thresholds to equalize error rates. By integrating fairness-aware methods, our approach
+                enhances transparency and reduces discriminatory outcomes in pretrial decision-making.
+            </p>
+
         </section>
 
         <section id="dataset-overview" class="container my-5">
-            <h2>Dataset Overview</h2>
-            <div class="card p-4 shadow-lg mt-3">
-                <h4 class="text-start">Dataset Overview</h4>
-                <p>Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising over
-                    285,000 cases. This comprehensive dataset includes demographic information, criminal history,
-                    court proceedings, and pretrial outcomes, offering valuable insights into the pretrial release
-                    system in New York State. The dataset underwent thorough cleaning and preprocessing, including
-                    handling of missing values, standardization of categorical variables, and validation of temporal
-                    data.</p>
-            </div>
-        </section>
+            <h2>Exploratory data analysis (EDA)</h2>
 
-        <section id="data" class="container my-5">
-            <h2>Data</h2>
-            <div id="edaCanvas" class="card p-4 shadow-lg mt-3">
+            <p>Our analysis utilizes the New York State Pretrial Release Dataset from 2023, comprising over
+                285,000 cases. This comprehensive dataset includes demographic information, criminal history,
+                court proceedings, and pretrial outcomes, offering valuable insights into the pretrial release
+                system in New York State. The dataset underwent thorough cleaning and preprocessing, including
+                handling of missing values, standardization of categorical variables, and validation of temporal
+                data.</p>
+
+            <div id="edaCanvas" class="card p-4">
                 <div class="row">
+
                     <!-- Left Box: Description -->
                     <div class="col-md-6">
                         <!-- Rearrest Outcomes Description -->
                         <div id="rearrestOutcomesDesc" class="description-box">
                             <h4 class="text-start">Rearrest Outcomes Distribution</h4>
-                            <p>This chart shows the distribution of rearrest outcomes during the pretrial period. 
-                                83.7% had no rearrest, 8.1% were rearrested for misdemeanors, 6.0% for non-violent felonies, 
+                            <p>This chart shows the distribution of rearrest outcomes during the pretrial period.
+                                83.7% had no rearrest, 8.1% were rearrested for misdemeanors, 6.0% for non-violent
+                                felonies,
                                 and 2.2% for violent felonies.</p>
                         </div>
 
                         <!-- Race Description -->
                         <div id="raceDesc" class="description-box d-none">
                             <h4 class="text-start">Race Distribution</h4>
-                            <p>This chart shows the racial breakdown of cases by reoffending status. Among White individuals,
-                                 30% had no reoffense while 15% reoffended. For Black individuals, 25% had no reoffense and 20% 
-                                 reoffended. Asian individuals show 10% with no reoffense and 5% with reoffense. For Other 
-                                 individuals, 5% had no reoffense and 3% with reoffense.</p>
+                            <p>This chart shows the racial breakdown of cases by reoffending status. Among White
+                                individuals,
+                                30% had no reoffense while 15% reoffended. For Black individuals, 25% had no reoffense
+                                and 20%
+                                reoffended. Asian individuals show 10% with no reoffense and 5% with reoffense. For
+                                Other
+                                individuals, 5% had no reoffense and 3% with reoffense.</p>
                         </div>
 
                         <!-- Ethnicity Description -->
                         <div id="ethnicityDesc" class="description-box d-none">
                             <h4 class="text-start">Ethnicity Distribution</h4>
-                            <p>This chart displays ethnicity distribution by reoffending status. Among Hispanic individuals, 
-                                35% had no reoffense while 12% reoffended. For Non-Hispanic individuals, 40% had no reoffense and
-                                 13% reoffended. The data shows similar reoffending proportions between the two ethnic categories.</p>
+                            <p>This chart displays ethnicity distribution by reoffending status. Among Hispanic
+                                individuals,
+                                35% had no reoffense while 12% reoffended. For Non-Hispanic individuals, 40% had no
+                                reoffense and
+                                13% reoffended. The data shows similar reoffending proportions between the two ethnic
+                                categories.</p>
                         </div>
 
                         <!-- Gender Description -->
                         <div id="genderDesc" class="description-box d-none">
                             <h4 class="text-start">Gender Distribution</h4>
-                            <p>This chart presents gender breakdown by reoffending status. Males show 45% with no reoffense and 15%
-                                with reoffense. Females show 30% with no reoffense and 10% with reoffense. Both genders have similar 
-                                proportional reoffending rates, but males represent a larger portion of the overall cases.</p>
+                            <p>This chart presents gender breakdown by reoffending status. Males show 45% with no
+                                reoffense and 15%
+                                with reoffense. Females show 30% with no reoffense and 10% with reoffense. Both genders
+                                have similar
+                                proportional reoffending rates, but males represent a larger portion of the overall
+                                cases.</p>
                         </div>
 
                         <div id="caseDistributionDesc" class="description-box d-none">
                             <h4 class="text-start">Case Distribution by County</h4>
-                            <p>This map visualizes how cases are distributed across New York counties. Darker colors represent counties
-                                with higher case counts, while lighter colors indicate fewer cases. Hovering over a county displays its name
+                            <p>This map visualizes how cases are distributed across New York counties. Darker colors
+                                represent counties
+                                with higher case counts, while lighter colors indicate fewer cases. Hovering over a
+                                county displays its name
                                 and total case count.</p>
+                            <div id="legend" class="legend-container"></div>
                         </div>
 
                         <div id="priorHistoryImpactDesc" class="description-box d-none">
                             <h4 class="text-start">Impact of Prior Offenses</h4>
-                            <p>This chart compares the reoffending rates between two groups: those with no prior offenses (6.01%) and those
-                                with prior offenses (10.18%). The bars represent the percentage of individuals in each category who reoffended 
+                            <p>This chart compares the reoffending rates between two groups: those with no prior
+                                offenses (6.01%) and those
+                                with prior offenses (10.18%). The bars represent the percentage of individuals in each
+                                category who reoffended
                                 during the pretrial period.</p>
                         </div>
                     </div>
@@ -262,10 +255,14 @@
                         </div>
 
                         <!-- Case Distribution Visualization -->
-                        <div id="caseDistribution" class="visualization-box d-none">
-                            <div id="countyMap"></div>
-                            <div id="legend"></div>
+                        <div class="map-legend-container">
+                            <div id="caseDistribution" class="chart-container d-none">
+                                <svg id="countyMap"></svg>
+
+                            </div>
+
                         </div>
+
 
                         <!-- Prior History Impact Visualization -->
                         <div id="priorHistoryImpact" class="visualization-box d-none">
@@ -287,42 +284,43 @@
             <h2>Model Development</h2>
 
             <h4>Feature Engineering</h4>
-            <p>The feature engineering process transformed raw pretrial data into predictive 
-                variables while minimizing bias. We created criminal history features 
-                capturing prior offense patterns, case characteristic variables describing 
+            <p>The feature engineering process transformed raw pretrial data into predictive
+                variables while minimizing bias. We created criminal history features
+                capturing prior offense patterns, case characteristic variables describing
                 current charges, and behavioral indicators reflecting past court compliance.
-                 We implemented log-transformation for skewed variables, one-hot encoding for 
-                 categorical features, and standardization to ensure equal feature importance 
-                 during model training.</p>
+                We implemented log-transformation for skewed variables, one-hot encoding for
+                categorical features, and standardization to ensure equal feature importance
+                during model training.</p>
 
             <h4>Random Forest Model Development</h4>
             <p>Our Random Forest Classifier used 100 trees and was trained on seven key features
-                 selected for predicting pretrial reoffending. The model handled both numerical and 
-                 categorical data effectively while capturing complex feature interactions.</p>
-        
+                selected for predicting pretrial reoffending. The model handled both numerical and
+                categorical data effectively while capturing complex feature interactions.</p>
+
             <p>We binarized prior criminal history variables, converting count-based features
                 into binary indicators (e.g., prior_misd_binary, prior_vfo_binary). The model
-                was trained on a 50-30-20 split (training, validation, test), ensuring a 
+                was trained on a 50-30-20 split (training, validation, test), ensuring a
                 balanced evaluation.</p>
-            
-            <p>Hyperparameters included max_depth=6, n_estimators=100, and random_state=42 
+
+            <p>Hyperparameters included max_depth=6, n_estimators=100, and random_state=42
                 for reproducibility. The entropy criterion was used to maximize information
                 gain, enhancing prediction reliability.</p>
 
             <h4>Model Performance</h4>
             <p>The Random Forest model achieved 83.27% overall accuracy, but balanced accuracy
                 was only 50.67%, indicating poor performance on the minority class.</p>
-            
-            <p>For non-reoffenders (Class 0), the model performed well (precision: 0.84, 
-                recall: 0.99, F1-score: 0.91). However, for reoffenders (Class 1), recall 
-                was extremely low (0.02), meaning most reoffenders were misclassified. 
+
+            <p>For non-reoffenders (Class 0), the model performed well (precision: 0.84,
+                recall: 0.99, F1-score: 0.91). However, for reoffenders (Class 1), recall
+                was extremely low (0.02), meaning most reoffenders were misclassified.
                 The ROC-AUC score was 0.6914, showing moderate discriminatory power.</p>
-            
-            <p>The model's imbalance favored non-reoffenders, highlighting the need for bias mitigation techniques to improve fairness and recall for reoffenders.</p>
+
+            <p>The model's imbalance favored non-reoffenders, highlighting the need for bias mitigation techniques to
+                improve fairness and recall for reoffenders.</p>
 
             <h4>Feature Importance Analysis</h4>
             <p>Feature importance analysis revealed that the strongest predictors were:</p>
-            
+
             <ul>
                 <li>Age at Arrest - 48%</li>
                 <li>Pending Misdemeanor Charges - 21%</li>
@@ -490,7 +488,7 @@
             <div class="row">
                 <!-- Pre-processing: Reweighing -->
                 <div class="col-md-6 mb-3">
-                    <div class="card shadow-lg">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-primary text-center"><i class="bi bi-arrow-repeat"></i>
                                 Reweighing
@@ -514,7 +512,7 @@
 
                 <!-- Post-processing: Calibrated Equalized Odds -->
                 <div class="col-md-6">
-                    <div class="card shadow-lg">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-success text-center"><i class="bi bi-balance-scale"></i>
                                 Calibrated Equalized
@@ -650,7 +648,7 @@
             <div class="row my-4 ">
                 <!-- Before Postprocessing Table -->
                 <div class="col-md-6 mb-3">
-                    <div class="card shadow-lg p-3">
+                    <div class="card p-3">
                         <h6 class="card-title text-center">Before Postprocessing</h6>
                         <table class="table table-bordered text-center">
                             <thead class="table-light">
@@ -691,7 +689,7 @@
 
                 <!-- After Postprocessing Table -->
                 <div class="col-md-6">
-                    <div class="card shadow-lg p-3">
+                    <div class="card p-3">
                         <h6 class="card-title text-center">After Postprocessing</h6>
                         <table class="table table-bordered text-center">
                             <thead class="table-light">
@@ -750,23 +748,29 @@
 
         <section id="conclusion" class="container my-5">
             <h2>Conclusion</h2>
-            
+
             <p>This research examines the application of machine learning fairness techniques to mitigate racial bias
-                in pretrial risk assessment algorithms. Our initial random forest model achieved 83.27% accuracy but 
-                demonstrated poor balanced accuracy (50.67%) and severely underperformed on the minority class of reoffenders,
-                with age at arrest emerging as the strongest predictor. We implemented a bias mitigation strategy that combining
-                dataset rebalancing through SMOTE, reweighing to equalize outcomes between privileged and unprivileged groups,
-                and calibrated equalized odds to balance error rate differences. These interventions improved the model's 
-                balanced accuracy to 64.66% and significantly increased recall for reoffenders from 0.02 to 0.66, 
+                in pretrial risk assessment algorithms. Our initial random forest model achieved 83.27% accuracy but
+                demonstrated poor balanced accuracy (50.67%) and severely underperformed on the minority class of
+                reoffenders,
+                with age at arrest emerging as the strongest predictor. We implemented a bias mitigation strategy that
+                combining
+                dataset rebalancing through SMOTE, reweighing to equalize outcomes between privileged and unprivileged
+                groups,
+                and calibrated equalized odds to balance error rate differences. These interventions improved the
+                model's
+                balanced accuracy to 64.66% and significantly increased recall for reoffenders from 0.02 to 0.66,
                 demonstrating more equitable performance across racial groups while highlighting the inherent trade-offs
-                between accuracy and fairness. 
-                
-                Our findings highlight the challenges of predicting reoffending fairly and accurately. This improved model
-                can help policymakers and criminal justice stakeholders develop more eqitable risk assessment tools 
-                that reduce bias while maintaining model performance. This research contributes to the field of fairness 
-                in machine learning by demonstrating the trade-off between accuracy and fairness in decisions that affect
-                many lives. It emphasizes the importance of balancing model performance with ethical considerations. By 
-                applying fairness metrics and debiasing techniques, this study provides insight into addressing bias in 
+                between accuracy and fairness.
+
+                Our findings highlight the challenges of predicting reoffending fairly and accurately. This improved
+                model
+                can help policymakers and criminal justice stakeholders develop more eqitable risk assessment tools
+                that reduce bias while maintaining model performance. This research contributes to the field of fairness
+                in machine learning by demonstrating the trade-off between accuracy and fairness in decisions that
+                affect
+                many lives. It emphasizes the importance of balancing model performance with ethical considerations. By
+                applying fairness metrics and debiasing techniques, this study provides insight into addressing bias in
                 predictive modeling within the criminal justice system.</p>
         </section>
 
@@ -779,11 +783,14 @@
             <div>
                 <a href="" class="me-3 text-body-secondary" target="_blank" aria-label="Paper">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-envelope-paper-fill" viewBox="0 0 16 16">
+                        class="bi bi-file-earmark-pdf-fill" viewBox="0 0 20 20">
+                        <path
+                            d="M5.523 12.424q.21-.124.459-.238a8 8 0 0 1-.45.606c-.28.337-.498.516-.635.572l-.035.012a.3.3 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548m2.455-1.647q-.178.037-.356.078a21 21 0 0 0 .5-1.05 12 12 0 0 0 .51.858q-.326.048-.654.114m2.525.939a4 4 0 0 1-.435-.41q.344.007.612.054c.317.057.466.147.518.209a.1.1 0 0 1 .026.064.44.44 0 0 1-.06.2.3.3 0 0 1-.094.124.1.1 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256M8.278 6.97c-.04.244-.108.524-.2.829a5 5 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.5.5 0 0 1 .145-.04c.013.03.028.092.032.198q.008.183-.038.465z" />
                         <path fill-rule="evenodd"
-                            d="M6.5 9.5 3 7.5v-6A1.5 1.5 0 0 1 4.5 0h7A1.5 1.5 0 0 1 13 1.5v6l-3.5 2L8 8.75zM1.059 3.635 2 3.133v3.753L0 5.713V5.4a2 2 0 0 1 1.059-1.765M16 5.713l-2 1.173V3.133l.941.502A2 2 0 0 1 16 5.4zm0 1.16-5.693 3.337L16 13.372v-6.5Zm-8 3.199 7.941 4.412A2 2 0 0 1 14 16H2a2 2 0 0 1-1.941-1.516zm-8 3.3 5.693-3.162L0 6.873v6.5Z" />
+                            d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.7 11.7 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.86.86 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.84.84 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.8 5.8 0 0 0-1.335-.05 11 11 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.24 1.24 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a20 20 0 0 1-1.062 2.227 7.7 7.7 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103" />
                     </svg>
                 </a>
+                
                 <a href="https://github.com/cao1224/ucsd_capstone_project" class="text-body-secondary" target="_blank"
                     aria-label="GitHub">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -824,6 +831,7 @@
             accordionItems.forEach(item => {
                 new bootstrap.Collapse(item, { toggle: false }).hide();
             });
+        });
 
         const expandAllFairnessBtn = document.getElementById("expandAllFairnessBtn");
         const collapseAllFairnessBtn = document.getElementById("collapseAllFairnessBtn");
@@ -839,57 +847,8 @@
             accordionFairnessItems.forEach(item => {
                 new bootstrap.Collapse(item, { toggle: false }).hide();
             });
-        });
-
-        let currentIndex = 0;
-        const sections = [
-            {desc: 'rearrestOutcomesDesc', viz: 'rearrestOutcomesViz'},
-            {desc: 'raceDesc', viz: 'raceViz'},
-            {desc: 'ethnicityDesc', viz: 'ethnicityViz'},
-            {desc: 'genderDesc', viz: 'genderViz'},
-            {desc: 'caseDistributionDesc', viz: 'caseDistribution'},
-            {desc: 'priorHistoryImpactDesc', viz: 'priorHistoryImpact'}
-        ];
-
-        function updateDisplay(index) {
-            // Hide all sections
-            sections.forEach(section => {
-                document.getElementById(section.desc).classList.add('d-none');
-                document.getElementById(section.viz).classList.add('d-none');
-            });
-
-            // Show current section
-            document.getElementById(sections[index].desc).classList.remove('d-none');
-            document.getElementById(sections[index].viz).classList.remove('d-none');
-
-            // Update button states
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === sections.length - 1;
-        }
-
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentIndex < sections.length - 1) {
-                currentIndex++;
-                updateDisplay(currentIndex);
-            }
-        });
-
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateDisplay(currentIndex);
-            }
-        });
-
-        // Initialize display
-        updateDisplay(0);
+        });    
     </script>
-
-    <!-- Include D3.js from CDN -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://unpkg.com/topojson@3"></script>
-
-
 </body>
 
 </html>
