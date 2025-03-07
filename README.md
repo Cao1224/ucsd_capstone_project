@@ -11,6 +11,10 @@ _UC San Diego Data Science Casptone Project [Winter 2025]_
 *   Aj Falak
 *   Kavya Sriram
 
+### Abstract
+Predictive models in pretrial risk assessment influence judicial decisions but often inherit racial biases from historical criminal justice data. This work examines racial bias in these models and applies bias mitigation techniques to improve fairness. Using the Pretrial Release dataset (244,271 records, 112 features), we trained a random forest model with 100 estimators, achieving 83.27% accuracy on a 20% test set. To mitigate bias, we applied Reweighing as a pre-processing technique and Calibrated Equalized Odds Postprocessing as a post-processing method. Reweighing reduced the mean outcome difference from 0.009 to -0.00 in the training set, improving fairness at the data level. However, in the testing set, 1 - min(DI, 1/DI) fluctuated between 0.0266 and 0.15, showing instability across classification thresholds. After postprocessing, equal opportunity difference improved, reducing from 0.0136 to 0.0031 in the test set, while balanced accuracy remained at 0.6357. The trade-off between fairness and accuracy was more controlled in postprocessing, making it more effective for a highly imbalanced dataset. Given that fairness adjustments remained stable across validation and testing, Calibrated Equalized Odds Postprocessing is the preferred approach. Future work should explore more diverse datasets, threshold tuning, and hybrid methods to balance fairness and model performance.
+
+
 File structure:
 ```
 ├── README.md   (this file)
